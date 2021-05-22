@@ -13,7 +13,7 @@ This application is a Vue SPA and Laravel API boilerplate using Sanctum for user
 
 ### The API
 
-The minimal Laravel API includes methods Sanctum for user registration and authentication. After cloning this repo to your machine, drop into the ./api directory and install the necessary dependencies using Composer.
+The minimal Laravel API includes methods Sanctum for user registration and authentication. After cloning this repo to your machine, drop into the ./api directory and install the necessary dependencies using [Composer](https://getcomposer.org/).
 
 ```
 composer install
@@ -38,7 +38,7 @@ Checkout the Laravel documentation [here](https://laravel.com/docs/master).
 
 ### The SPA
 
-The Vue SPA employ [AXIOS](https://github.com/axios/axios) for making HTTP requests to the Laravel API. After cloning this repo to your machine, drop into the ./web directory and install the necessary dependencies using NPM.
+The Vue SPA employ [AXIOS](https://github.com/axios/axios) for making HTTP requests to the Laravel API. After cloning this repo to your machine, drop into the ./web directory and install the necessary dependencies using [NPM](https://www.npmjs.com/).
 
 ```
 npm install
