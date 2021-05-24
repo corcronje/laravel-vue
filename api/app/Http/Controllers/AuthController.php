@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,18 +21,15 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => $request->password, // encrypted through hook
         ]);
 
         $token = $user->createToken('apitoken')->plainTextToken;
 
         return response([
             'message' => 'Registered',
-            'user' => [
-                'name' => $user->name,
-                'email' => $user->email,
-                'token' => $token
-            ]
+            'user' => new UserResource($user),
+            'token' => $token
         ], 201);
     }
 
@@ -53,11 +52,8 @@ class AuthController extends Controller
 
         return response([
             'message' => 'Authenticated',
-            'user' => [
-                'name' => $user->name,
-                'email' => $user->email,
-                'token' => $token
-            ]
+            'user' => new UserResource($user),
+            'token' => $token
         ], 201);
     }
 
@@ -74,10 +70,7 @@ class AuthController extends Controller
     {
         return response([
             'message' => 'Authenticated',
-            'user' => [
-                'name' =>  $request->user()->name,
-                'email' => $request->user()->email
-            ]
-        ]);
+            'user' => new UserResource($request->user()),
+        ], 200);
     }
 }
