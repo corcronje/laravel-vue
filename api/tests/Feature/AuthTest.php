@@ -5,12 +5,24 @@ namespace Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class AuthTest extends TestCase
 {
     use RefreshDatabase;
+
+    /** @test */
+    public function a_user_password_is_hashed()
+    {
+        $password = Str::random();
+
+        $user = User::factory()->create(['password' => $password]);
+
+        $this->assertTrue(Hash::check($password, $user->password));
+    }
 
     /** @test */
     public function a_user_can_register()
